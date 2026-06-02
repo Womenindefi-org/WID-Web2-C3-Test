@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ProMower - Professional Lawn Care</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap"
+          rel="stylesheet"/>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green-dark: #0f3d1f;
+            --green-mid: #1e6b38;
+            --green-light: #2d9e58;
+            --green-accent: #7ecf48;
+            --cream: #f5f0e8;
+            --cream-dark: #e8e0cf;
+            --white: #ffffff;
+            --text-dark: #141f17;
+            --text-mid: #3a5244;
+            --text-light: #6e8f7a;
+            --gold: #c8a84b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 18px 0;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 61, 31, 0.97);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--green-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-accent);
+        }
+
+        .nav-links .btn-nav {
+            background: var(--green-accent);
+            color: var(--green-dark);
+            padding: 10px 22px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .nav-links .btn-nav:hover {
+            background: #91d95e;
+            transform: translateY(-1px);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+
+        .hero {
+            min-height: 100vh;
+            background-image: url('assets/images/hero.webp');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                    to right,
+                    rgba(10, 30, 15, 0.88) 0%,
+                    rgba(10, 30, 15, 0.55) 60%,
+                    rgba(10, 30, 15, 0.2) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            padding: 100px 0 60px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6rem, 6vw, 5rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--green-accent);
+        }
+
+        .hero-content p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.75;
+            max-width: 460px;
+            margin-bottom: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--green-accent);
+            color: var(--green-dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 14px 30px;
+            border-radius: 6px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #91d95e;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 14px 30px;
+            border-radius: 6px;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+
+        .stats {
+            background: var(--green-dark);
+            padding: 36px 0;
+            border-top: 1px solid rgba(126, 207, 72, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 16px 8px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--green-accent);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.45);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--green-light);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 4vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text-dark);
+        }
+
+        .section-title.light {
+            color: var(--white);
+        }
+
+        .section-subtitle {
+            margin-top: 14px;
+            font-size: 0.98rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 440px;
+        }
+
+
+        .services {
+            background: var(--cream);
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 52px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--cream-dark);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(15, 61, 31, 0.12);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .service-card-body {
+            padding: 26px;
+        }
+
+        .service-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(45, 158, 88, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green-light);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            line-height: 1.65;
+        }
+
+
+        .about {
+            background: var(--green-dark);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: center;
+        }
+
+        .about-img-wrap {
+            position: relative;
+        }
+
+        .about-img-wrap img {
+            width: 100%;
+            border-radius: 12px;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+        }
+
+        .about-years {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--green-accent);
+            color: var(--green-dark);
+            border-radius: 12px;
+            padding: 18px 22px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.82rem;
+            line-height: 1.3;
+        }
+
+        .about-years strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .about-features {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .about-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .about-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(126, 207, 72, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green-accent);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .about-feature p {
+            font-size: 0.84rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+        }
+
+
+        .testimonials {
+            background: var(--cream-dark);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 52px;
+        }
+
+        .testimonials-header .section-subtitle {
+            margin: 14px auto 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--cream-dark);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(15, 61, 31, 0.09);
+        }
+
+        .testimonial-card.featured {
+            background: var(--green-dark);
+            border-color: var(--green-mid);
+        }
+
+        .testimonial-card.featured .testimonial-text,
+        .testimonial-card.featured .testimonial-name {
+            color: var(--white);
+        }
+
+        .testimonial-card.featured .testimonial-role {
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .testimonial-card.featured .stars {
+            color: var(--green-accent);
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+
+        .testimonial-text {
+            font-size: 0.92rem;
+            color: var(--text-mid);
+            line-height: 1.75;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-author img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+        }
+
+        .testimonial-role {
+            font-size: 0.76rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+
+        .cta-section {
+            background: var(--green-dark);
+            padding: 90px 0;
+            text-align: center;
+            background-image: url('assets/images/hero.webp');
+            background-size: cover;
+            background-position: center 40%;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 30, 15, 0.82);
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .cta-inner h2 span {
+            color: var(--green-accent);
+        }
+
+        .cta-inner p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            margin-bottom: 38px;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.88rem;
+            margin-top: 28px;
+            justify-content: center;
+        }
+
+        .cta-contact-item i {
+            color: var(--green-accent);
+        }
+
+
+        footer {
+            background: #070f09;
+            color: rgba(255, 255, 255, 0.45);
+            padding: 60px 0 28px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 44px;
+        }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            line-height: 1.7;
+            margin-top: 14px;
+            max-width: 250px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .footer-social a:hover {
+            background: rgba(126, 207, 72, 0.15);
+            color: var(--green-accent);
+        }
+
+        .footer-col h5 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 18px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 11px;
+        }
+
+        .footer-col ul a {
+            color: rgba(255, 255, 255, 0.42);
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--green-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.35);
+            transition: color 0.2s;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .about-img-wrap {
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .about-years {
+                right: 10px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                inset: 0;
+                top: 64px;
+                background: rgba(10, 28, 15, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 28px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="container nav-inner">
+        <a href="#" class="nav-logo">Pro<span>Mower</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">Why Us</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact" class="btn-nav">Get a Quote</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+
+<section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="hero-content">
+            <h1>Your Lawn.<br/><span>Done Right.</span></h1>
+            <p>
+                ProMower delivers professional lawn care with the equipment,
+                expertise, and reliability your yard deserves.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">Get a Free Quote</a>
+                <a href="#services" class="btn-outline">View Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">1,200+</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">8 yrs</span>
+                <span class="stat-label">In Business</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">98%</span>
+                <span class="stat-label">Satisfaction Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Lawns Serviced</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="section services" id="services">
+    <div class="container">
+        <div class="services-header">
+            <div>
+                <span class="section-label">What We Do</span>
+                <h2 class="section-title">Services for<br/>Every Lawn</h2>
+            </div>
+            <p class="section-subtitle">
+                From weekly mowing to full seasonal care — we handle it all so you don't have to.
+            </p>
+        </div>
+        <div class="services-grid">
+
+            <div class="service-card">
+                <img src="assets/images/service-mowing.webp" alt="Lawn mowing service"/>
+                <div class="service-card-body">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3>Lawn Mowing</h3>
+                    <p>Weekly or bi-weekly precision cuts suited to your grass type. We edge, trim, and blow for a clean
+                        result every visit.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="assets/images/service-landscaping.webp" alt="Landscaping service"/>
+                <div class="service-card-body">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3>Landscaping & Design</h3>
+                    <p>Custom planting, mulching, and layout design that adds lasting curb appeal and real value to your
+                        property.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="assets/images/service-irrigation.webp" alt="Irrigation service"/>
+                <div class="service-card-body">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <h3>Irrigation & Watering</h3>
+                    <p>Smart sprinkler setup and maintenance that keeps your lawn green without wasting water.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-img-wrap">
+                <img src="assets/images/about.webp" alt="ProMower team at work"/>
+                <div class="about-years">
+                    <strong>8+</strong>
+                    Years of<br/>Excellence
+                </div>
+            </div>
+            <div class="about-content">
+                <span class="section-label" style="color: var(--green-accent);">Why Choose Us</span>
+                <h2 class="section-title light">We Don't Just Mow —<br/>We Take Pride.</h2>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4>Same-Week Scheduling</h4>
+                            <p>Book online and get your first visit confirmed within 24 hours.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4>Licensed & Insured</h4>
+                            <p>All ProMower crews are certified, background-checked, and fully insured.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div>
+                            <h4>Eco-Friendly Equipment</h4>
+                            <p>Low-emission mowers and sustainable practices that are kind to your lawn and the
+                                planet.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4>100% Satisfaction Guarantee</h4>
+                            <p>Not happy? We'll come back and fix it — free of charge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section testimonials" id="testimonials">
+    <div class="container">
+        <div class="testimonials-header">
+            <span class="section-label">What Clients Say</span>
+            <h2 class="section-title">Trusted by Homeowners<br/>Across the City</h2>
+            <p class="section-subtitle">Real feedback from real customers who hired ProMower.</p>
+        </div>
+        <div class="testimonials-grid">
+
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"ProMower completely transformed our front yard. It went from patchy and
+                    embarrassing to the best-looking lawn on the street."</p>
+                <div class="testimonial-author">
+                    <img src="https://i.pravatar.cc/100?img=47" alt="Sarah M."/>
+                    <div>
+                        <div class="testimonial-name">Sarah Mitchell</div>
+                        <div class="testimonial-role">Homeowner, Austin TX</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card featured">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"Reliable, professional, and they genuinely care about the work they do.
+                    I've had lawn services before but none as consistent as ProMower."</p>
+                <div class="testimonial-author">
+                    <img src="https://i.pravatar.cc/100?img=12" alt="James T."/>
+                    <div>
+                        <div class="testimonial-name">James Thornton</div>
+                        <div class="testimonial-role">Property Manager, Dallas TX</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"The team showed up on time, worked quickly, and left the yard spotless.
+                    I've already signed up for the monthly plan."</p>
+                <div class="testimonial-author">
+                    <img src="https://i.pravatar.cc/100?img=29" alt="Linda K."/>
+                    <div>
+                        <div class="testimonial-name">Linda Kowalski</div>
+                        <div class="testimonial-role">Homeowner, Houston TX</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="cta-section" id="contact">
+    <div class="container">
+        <div class="cta-inner">
+            <h2>Ready for a <span>Better Lawn?</span></h2>
+            <p>Get a free, no-obligation quote today. Our team is ready when you are.</p>
+            <div class="cta-buttons">
+                <a href="tel:+15551234567" class="btn-primary">
+                    <i class="fa-solid fa-phone" style="margin-right: 8px;"></i> (555) 123-4567
+                </a>
+                <a href="mailto:hello@promower.com" class="btn-outline">
+                    <i class="fa-solid fa-envelope" style="margin-right: 8px;"></i> Email Us
+                </a>
+            </div>
+            <div class="cta-contact-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Serving Austin, Dallas, and Houston metro areas</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo">Pro<span>Mower</span></a>
+                <p>Professional lawn care and landscaping. Making lawns beautiful — one yard at a time since 2016.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>Services</h5>
+                <ul>
+                    <li><a href="#">Lawn Mowing</a></li>
+                    <li><a href="#">Landscaping</a></li>
+                    <li><a href="#">Fertilization</a></li>
+                    <li><a href="#">Hedge Trimming</a></li>
+                    <li><a href="#">Seasonal Cleanup</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <ul>
+                    <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+                    <li><a href="mailto:hello@promower.com">hello@promower.com</a></li>
+                    <li><a href="#">123 Green St, Austin TX</a></li>
+                    <li><a href="#">Mon–Sat: 7am – 6pm</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 ProMower LLC. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 40) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+            navLinks.classList.remove('open');
+        });
+    });
+</script>
+
+</body>
+</html>
